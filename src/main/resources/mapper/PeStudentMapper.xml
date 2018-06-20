@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuan.dao.PeStudentDao" >
+    <sql id="BASE_TABLE">
+        pe_student
+    </sql>
+
+    <!--type属性指定要映射的那个实体类，由于在conf.xml中已经用`<typeAliases>`配置了包名，故此地不用写全类名-->
+    <resultMap type="PeStudent" id="studentResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="className" column="class_name"/>
+        <result property="sex" column="sex"/>
+        <result property="idCard" column="id_card"/>
+        <result property="parentName" column="parent_name"/>
+        <result property="phone" column="phone"/>
+        <result property="classCode" column="class_code"/>
+    </resultMap>
+
+    <sql id="BASE_COLUMN">
+        id, name, class_name, sex, id_card, parent_name, phone, class_code
+    </sql>
+
+    <select id="getAllStudentList" resultMap="studentResult">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+    </select>
+
+    <select id="findListUserByClassCode"  parameterType="String" resultMap="studentResult">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE class_code in ('3') and LENGTH(id_card) = 18 and class_name = '三（2）'
+    </select>
+
+    <insert id="insertPeStudents">
+        <foreach collection="students" item="stu" separator=";">
+            insert into pe_student(name, class_name, sex, id_card, parent_name, phone)
+            values(#{stu.name},#{stu.className},#{stu.sex},#{stu.idCard},#{stu.parentName},#{stu.phone})
+        </foreach>
+    </insert>
+
+</mapper>

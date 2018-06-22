@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuan.dao.ReptilianFreeSsInfoDao" >
+    <sql id="BASE_TABLE">
+        pe_freeSsInfo
+    </sql>
+
+    <insert id="saveFreeSsInfoList">
+        <foreach collection="freeSsInfoList" item="freeSsInfo" separator=";">
+            insert into pe_freeSsInfo(vtum, address, port, password, method, time, city)
+            values(#{freeSsInfo.vtum},#{freeSsInfo.address},#{freeSsInfo.port},#{freeSsInfo.password},
+            #{freeSsInfo.method},#{freeSsInfo.time},#{freeSsInfo.city})
+        </foreach>
+    </insert>
+
+</mapper>

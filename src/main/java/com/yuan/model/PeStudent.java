@@ -5,14 +5,14 @@ package com.yuan.model;
  * @date 2018/05/28
  */
 public class PeStudent {
-    int id;
-    String name;
-    String className;
-    String sex;
-    String idCard;
-    String parentName;
-    String phone;
-    String classCode;
+    private int id;
+    private String name;
+    private String className;
+    private String sex;
+    private String idCard;
+    private String parentName;
+    private String phone;
+    private String classCode;
 
     public int getId() {
         return id;
